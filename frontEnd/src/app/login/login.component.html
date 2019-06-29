@@ -1,0 +1,29 @@
+<section id="loginPage">
+  <div class="container p-5">
+    <div class="row mt-5">
+      <div class="col-lg-4 offset-lg-4" >
+        <app-message>
+        </app-message>
+        <div class="card bg-light">
+          <h4 class="text-center">
+          loginPage
+          </h4>
+          <hr>
+          <form>
+            <div class="form-group">
+              <label for="" class="form-control-lable">email</label>
+              <input type="email" class="form-control" name="email" [(ngModel)]="email" placeholder=" email">
+            </div>
+            <div class="form-group">
+                <label for="" class="form-control-lable">password</label>
+                <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder=" email">
+              </div>
+              <hr>
+              <button class="btn btn-primary btn-block" (click)="login()" [disabled]="btndisabled"> login</button>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
