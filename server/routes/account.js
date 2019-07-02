@@ -1,7 +1,7 @@
 const express  =  require('express')
 const jwt  =  require('jsonwebtoken')
 const router = express.Router();
-
+const checkJwt = require('../middleware/check-jwt');
 const User  = require('../model/user');
 const config = require('../configuration/congif')
 router.post('/signup',(req,res,next)=>{
@@ -87,4 +87,81 @@ router.post('/login',async(req,res,next)=>{
         })
 })
 
+
+// creating same get and post method by one route ..this is done vio two method 1is here
+
+// router.get('/profile')
+// router.post('/profile') 2nd is here
+
+
+router.route('/profile')
+    .get(checkJwt,(req,res,next)=>{
+            User.findOne({_id:req.decoded.user._id},(err,user1)=>{
+                console.log(req.decoded.user._id);
+                res.json({
+                    success:true,
+                    user:user1,
+                    message:'succesfully'
+                });
+            });
+    })
+    .post(checkJwt,(req,res,next)=>{
+            User.findOne({_id:req.decoded.user._id},(err,user)=>{
+                if (err) {
+                    return next(err)
+                } 
+                if (req.body.name) user.name  = req.body.name;
+                if(req.body.email) user.email  = req.body.email;
+                if(req.body.password) user.password  = req.body.password;
+                if(req.body.isSeller) user.isSeller  = req.body.isSeller;
+
+                user.isSeller  = req.body.isSeller;
+
+                user.save();
+                res.json({
+                    success:true,
+                    message:'succesfully edited your profile'
+                })
+            })
+    })
+
+
+    // adddress api
+
+    router.route('/address')
+        .get(checkJwt,(req,res,next)=>{
+                User.findOne({_id:req.decoded.user._id},(err,user)=>{
+                    if (err) {
+                        return next(err)
+                    }
+                    else{
+                        res.status(200).json({
+                            success:true,
+                            address:user.address,
+                            message:"data received"
+                        });
+                    }
+                })
+        })
+        .post(checkJwt,(req,res)=>{
+            User.findOne({_id:req.decoded.user._id},(err,user)=>{
+                    if (err) {
+                        return next(err)
+                    }
+                    if(req.body.addr1) user.address.addr1 = req.body.addr1;
+                    if(req.body.addr2) user.address.addr2  = req.body.addr2;
+                    if(req.body.state) user.address.state  = req.body.state;
+                    if(req.body.city) user.address.city  = req.body.city;
+                    if(req.body.country) user.address.country  =req.body.country;
+                    if(req.body.postalCode) user.address.postalCode  = req.body.postalCode;
+
+                    user.save();
+                    res.status(200).json({
+                        success:true,
+                        address:user.address,
+                        message:"address is updated successfully"
+                    })
+
+            })
+        })
 module.exports =  router;

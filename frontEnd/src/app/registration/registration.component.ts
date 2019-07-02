@@ -63,7 +63,8 @@ export class RegistrationComponent implements OnInit {
       });
       if (data['success']) {
           localStorage.setItem('token',data['token']);
-          this.dataserv.successs("registraion is succesfull");
+          this.dataserv.success("registraion is succesfull");
+          await this.dataserv.getProfile();
       }else{
         this.dataserv.error(data['message']);
       }

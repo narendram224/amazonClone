@@ -43,6 +43,7 @@ async login(){
 
           if (data['success']) {
             localStorage.setItem('token',data['token']);
+            await this.dataServ.getProfile();
             this.router.navigate(['/']);
           }else{
             this.dataServ.error(data['message']);

@@ -14,7 +14,7 @@ export class AppComponent {
   token= null;
 
   constructor(private dataSer:DataService,private restApiServ:RestApiService,private router:Router){
-    
+      this.dataSer.getProfile();
   }
   getToken(){
     return localStorage.getItem('token');
