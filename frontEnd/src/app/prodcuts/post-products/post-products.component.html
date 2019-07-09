@@ -1,0 +1,44 @@
+<section id="product">
+  <div class="container p-5">
+    <h4 class="ddisplay-4">Post a prodcut for sell</h4>
+    <hr>
+    <app-message></app-message>
+    <div *ngIf="!categories" class="m-auto">
+      <h1 class="text-center mt-5 display-3">
+        <i class="fa fa-spinner fa-spin">
+        </i>
+      </h1>
+    </div>
+    <div *ngIf="categories" class="card bg-light">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for=" " class="form-control-label">title</label>
+            <input type="text" name="title" id="" class="form-control" placeholder="title" [(ngModel)]="products.title">
+          </div>
+          <div class="form-group">
+            <label for=" " class="form-control-label">Price</label>
+            <input type="text" name="price" id="" class="form-control" placeholder="title" [(ngModel)]="products.price">
+          </div>
+          <div class="form-group">
+            <label >category</label>
+           <select name="categoryId" [(ngModel)]="products.categoryId" class=" custom-select">
+             <option *ngFor="let category of categories" [value]="category._id">
+               {{category.name}}
+             </option>
+           </select>
+          </div>
+
+          <div class="form-group">
+            <label for=" " class="form-control-label">description</label>
+            <textarea type="text" name="description" id="" class="form-control" placeholder="title" row="5" [(ngModel)]="products.description"></textarea></div>
+          <div class="form-group">
+            <label for=" ">upload image</label>
+            <input type="file" name="file" id="" class="form-control-file" accept="image/*" (change)="fileChange($event)">
+          </div>
+          <button class="btn btn-success" (click)="post()" [disabled]="btnDisbaled"> Post </button> 
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

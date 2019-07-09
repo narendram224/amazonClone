@@ -15,6 +15,7 @@ export class AppComponent {
 
   constructor(private dataSer:DataService,private restApiServ:RestApiService,private router:Router){
       this.dataSer.getProfile();
+      this.dataSer.cartItems = this.dataSer.getCart().length;
   }
   getToken(){
     return localStorage.getItem('token');
@@ -31,11 +32,17 @@ closeDropdown(dropdown){
   logout(){
       this.dataSer.user ={};
       localStorage.clear();
+      this.dataSer.cartItems = 0;
       this.router.navigate(['']);
 
   }
 
   search(){
     
+      if (this.searchterm) {
+        this.collapse();
+        this.router.navigate(['search',{query:this.searchterm}]);
+        
+      }
   }
 }

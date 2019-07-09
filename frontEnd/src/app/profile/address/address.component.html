@@ -1,0 +1,52 @@
+
+<section id="address">
+  <div class="container p-5">
+    <h4 class="display-4">my shipping Address </h4>
+    <hr>
+    <app-message></app-message>
+    <div *ngIf="!currentAddress" class="m-auto">
+        <h1 class="text-center display-3 mt-5">
+          <i class="fa fa-spinner fa-spin"></i>
+        </h1>
+    </div>
+    <div *ngIf="currentAddress" class="card ng-light">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="add1"> address 1</label>
+              <input type="text" name="adddress1" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.addr1">
+            </div>
+            <div class="form-group">
+              <label for="add1"> address 1</label>
+              <input type="text" name="adddress2" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.addr2">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="add1">state</label>
+                    <input type="text" name="state" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.state">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="add1"> city</label>
+                    <input type="text" name="city" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.city">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="add1"> Postal Code</label>
+                    <input type="text" name="postalCode" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.postalCode">
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="add1">Country</label>
+              <input type="text" name="country" id="add1" class="form-control" placeholder="" [(ngModel)]="currentAddress.country">
+            </div>
+            <button type="button" class="btn btn-danger" (click)="updateAddress()" [disabled]="btnDiabled"> Chnage address</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</section>

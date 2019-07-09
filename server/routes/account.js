@@ -3,7 +3,8 @@ const jwt  =  require('jsonwebtoken')
 const router = express.Router();
 const checkJwt = require('../middleware/check-jwt');
 const User  = require('../model/user');
-const config = require('../configuration/congif')
+const config = require('../configuration/congif');
+const  Order  = require('../model/order');
 router.post('/signup',(req,res,next)=>{
     // let userData = req.body;
 
@@ -51,7 +52,7 @@ router.post('/signup',(req,res,next)=>{
 // login routes
 
 router.post('/login',async(req,res,next)=>{
-        let user = new User();
+        
         await User.findOne({email:req.body.email},(err,Loginuser)=>{
             if (err) {
                 res.status(401).json({
@@ -72,7 +73,7 @@ router.post('/login',async(req,res,next)=>{
                     else{
                         // creating token for 7days
                         var token  =  jwt.sign({
-                                user:user,   
+                                user:Loginuser,   
                             },config.secret,{
                                 expiresIn:'7d'
                             });
@@ -94,15 +95,17 @@ router.post('/login',async(req,res,next)=>{
 // router.post('/profile') 2nd is here
 
 
-router.route('/profile')
+ router.route('/profile')
     .get(checkJwt,(req,res,next)=>{
+
             User.findOne({_id:req.decoded.user._id},(err,user1)=>{
-                console.log(req.decoded.user._id);
+                    console.log(req.decoded.user._id);
                 res.json({
                     success:true,
                     user:user1,
-                    message:'succesfully'
+                    message:'succesfully profile show'
                 });
+                console.log(req.decoded.user);
             });
     })
     .post(checkJwt,(req,res,next)=>{
@@ -163,5 +166,29 @@ router.route('/profile')
                     })
 
             })
+        })
+
+
+        // order api 
+
+        router.get('/orders',checkJwt,(req,res,next)=>{
+        Order.find({owner:req.decoded.user._id})
+        .populate('products.product')
+        .populate('owner')
+        .exec((err,orders)=>{
+                if (err) {
+                    res.json({
+                        success:true,
+                        message:"Couldn't find any error"
+                    });
+                }else{
+                    res.json({
+                        success:true,
+                        message:'Found the order',
+                        orders:orders
+                    })
+                }
+
+        })
         })
 module.exports =  router;

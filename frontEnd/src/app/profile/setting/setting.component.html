@@ -3,33 +3,33 @@
     <h4 class="display-4">my Account Settings</h4>
     <hr>
     <app-message></app-message>
-    <div *ngIf="!currentSettings" class="m-auto">
+    <div *ngIf="!currentsetting" class="m-auto">
         <h1 class="diplay-2 text-center mt-5">
           <i class="fa fa-spinner fa-spin"></i>
         </h1>
     </div>
-    <div *ngIf="currentSettings" class="card bg-light">
+    <div *ngIf="currentsetting" class="card bg-light">
       <div class="card-body">
         <form >
           <div class="form-group">
             <label for="" class="form-control-lable">name</label>
-            <input type="text" name="name" class="form-control" placeholder="" [(ngModel)]="currentSettings.name">
+            <input type="text" name="name" class="form-control" placeholder="" [(ngModel)]="currentsetting.name">
           </div>
           <div class="form-group">
             <label for="" class="form-control-lable">email</label>
-            <input type="text" name="email" class="form-control" placeholder="email" [(ngModel)]="currentSettings.email">
+            <input type="text" name="email" class="form-control" placeholder="email" [(ngModel)]="currentsetting.email">
           </div>
           <div class="form-check">
-            <label for="" class="form-control-lable">New Password</label>
-            <input type="checkbox" name="isSeller" class="form-control" placeholder="" [(ngModel)]="currentSettings.isSeller">
-          </div>
+            <label for="" class="form-check-lable">
+            <input type="checkbox" name="isSeller" class="form-check-input" placeholder="" [(ngModel)]="currentsetting.isSeller">isSeller
+          </label></div>
           <div class="form-group">
             <label for="" class="form-control-lable">New Password</label>
-            <input type="password" name="newPwd" class="form-control" placeholder="" [(ngModel)]="currentSettings.newPwd">
+            <input type="password" name="newPwd" class="form-control" placeholder="" [(ngModel)]="currentsetting.newPwd">
           </div>
           <div class="form-group">
             <label for="" class="form-control-lable">confrom password</label>
-            <input type="password" name="pwdConfirm" class="form-control" placeholder="" [(ngModel)]="currentSettings.pwdConfirm">
+            <input type="password" name="pwdConfirm" class="form-control" placeholder="" [(ngModel)]="currentsetting.pwdConfirm">
           </div>
           <button type="button" class="btn btn-danger" (click)="update()" [disabled]="btnDiabled">update</button>
         </form>

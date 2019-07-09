@@ -8,9 +8,11 @@ import { DataService } from '../data.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private dataser:DataService) { }
+  constructor(private dataser:DataService) {this.dataser.getProfile(); }
 
   ngOnInit() {
+    
   }
+
 
 }
