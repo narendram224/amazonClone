@@ -5,7 +5,7 @@ const multerS3 = require('multer-s3');
 const checkjwt = require('../middleware/check-jwt');
 const Product  = require('../routes/product');
 const faker = require('faker');
-const s3 = new aws.S3({accessKeyId:"AKIAQNYJSR7WRSTATALL",secretAccessKey:"LKgWj8tyIu2dU5o8bFny3wP+tpm1JvUedS45pS2z"});
+const s3 = new aws.S3({accessKeyId:"your access keu id of Iam user",secretAccessKey:"same user secret key"});
 
 const upload = multer({
     storage:multerS3({

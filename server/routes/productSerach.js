@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const algoliaSearch =  require('algoliasearch');
-const client  = algoliaSearch('3KCZ990ESV','92ce8854a897d186e87f240f48475ef8');
+const client =  algoliaSearch('appcode af algolia index', "apikey of that index");
+
 const index = client.initIndex('amazonClone');
 
 // creting api for search

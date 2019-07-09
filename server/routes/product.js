@@ -39,8 +39,8 @@ productSchema
 
 productSchema.plugin(deepPopulate); 
 productSchema.plugin(mongooseAlgolia,{
-    appId:'3KCZ990ESV',
-    apiKey:'92ce8854a897d186e87f240f48475ef8',
+    appId:'app code',
+    apiKey:'api key of alogolia ',
     indexName:'amazonClone',
     selector:'_id title description price owner image review created averageRating',
     populate:{
